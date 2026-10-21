@@ -4717,7 +4717,7 @@
                     }
                 },
                 "response": {
-                    "type": "json"
+                    "type": "none"
                 },
                 "examples": null
             },
@@ -4895,7 +4895,7 @@
                     }
                 },
                 "response": {
-                    "type": "json"
+                    "type": "none"
                 },
                 "examples": null
             },
@@ -5239,7 +5239,7 @@
                     }
                 },
                 "response": {
-                    "type": "json"
+                    "type": "none"
                 },
                 "examples": null
             },
@@ -5484,7 +5484,7 @@
                     }
                 },
                 "response": {
-                    "type": "json"
+                    "type": "none"
                 },
                 "examples": null
             },
@@ -5758,7 +5758,7 @@
                     }
                 },
                 "response": {
-                    "type": "json"
+                    "type": "none"
                 },
                 "examples": null
             },
@@ -5998,7 +5998,7 @@
                     }
                 },
                 "response": {
-                    "type": "json"
+                    "type": "none"
                 },
                 "examples": null
             },
@@ -6649,7 +6649,7 @@
                     }
                 },
                 "response": {
-                    "type": "json"
+                    "type": "none"
                 },
                 "examples": null
             },
@@ -7571,7 +7571,7 @@
                     "bodyRequired": null
                 },
                 "response": {
-                    "type": "json"
+                    "type": "none"
                 },
                 "examples": null
             },
