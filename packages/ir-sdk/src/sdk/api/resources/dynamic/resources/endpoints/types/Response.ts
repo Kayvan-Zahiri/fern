@@ -15,7 +15,11 @@ export type Response =
     | FernIr.dynamic.Response.StreamParameter
     | FernIr.dynamic.Response.FileDownload
     | FernIr.dynamic.Response.Text
-    | FernIr.dynamic.Response.Bytes;
+    | FernIr.dynamic.Response.Bytes
+    /**
+     * The endpoint does not return a response body (e.g. a 204 delete). Some SDKs
+     * surface this in the method signature (e.g. Go returns only `error`). */
+    | FernIr.dynamic.Response.None;
 
 export namespace Response {
     export interface Json extends _Utils {
@@ -42,6 +46,10 @@ export namespace Response {
         type: "bytes";
     }
 
+    export interface None extends _Utils {
+        type: "none";
+    }
+
     export interface _Utils {
         _visit: <_Result>(visitor: FernIr.dynamic.Response._Visitor<_Result>) => _Result;
     }
@@ -53,6 +61,7 @@ export namespace Response {
         fileDownload: () => _Result;
         text: () => _Result;
         bytes: () => _Result;
+        none: () => _Result;
         _other: (value: { type: string }) => _Result;
     }
 }
@@ -130,6 +139,18 @@ export const Response = {
         };
     },
 
+    none: (): FernIr.dynamic.Response.None => {
+        return {
+            type: "none",
+            _visit: function <_Result>(
+                this: FernIr.dynamic.Response.None,
+                visitor: FernIr.dynamic.Response._Visitor<_Result>,
+            ) {
+                return FernIr.dynamic.Response._visit(this, visitor);
+            },
+        };
+    },
+
     _visit: <_Result>(value: FernIr.dynamic.Response, visitor: FernIr.dynamic.Response._Visitor<_Result>): _Result => {
         switch (value.type) {
             case "json":
@@ -144,6 +165,8 @@ export const Response = {
                 return visitor.text();
             case "bytes":
                 return visitor.bytes();
+            case "none":
+                return visitor.none();
             default:
                 return visitor._other(value);
         }

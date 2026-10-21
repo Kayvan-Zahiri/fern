@@ -255,7 +255,7 @@
                 "bodyRequired": null
             },
             "response": {
-                "type": "json"
+                "type": "none"
             },
             "examples": null
         }

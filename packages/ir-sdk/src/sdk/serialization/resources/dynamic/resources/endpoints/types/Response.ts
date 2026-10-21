@@ -13,6 +13,7 @@ export const Response: core.serialization.Schema<serializers.dynamic.Response.Ra
             fileDownload: core.serialization.object({}),
             text: core.serialization.object({}),
             bytes: core.serialization.object({}),
+            none: core.serialization.object({}),
         })
         .transform<FernIr.dynamic.Response>({
             transform: (value) => {
@@ -29,6 +30,8 @@ export const Response: core.serialization.Schema<serializers.dynamic.Response.Ra
                         return FernIr.dynamic.Response.text();
                     case "bytes":
                         return FernIr.dynamic.Response.bytes();
+                    case "none":
+                        return FernIr.dynamic.Response.none();
                     default:
                         return value as FernIr.dynamic.Response;
                 }
@@ -43,7 +46,8 @@ export declare namespace Response {
         | Response.StreamParameter
         | Response.FileDownload
         | Response.Text
-        | Response.Bytes;
+        | Response.Bytes
+        | Response.None;
 
     export interface Json {
         type: "json";
@@ -67,5 +71,9 @@ export declare namespace Response {
 
     export interface Bytes {
         type: "bytes";
+    }
+
+    export interface None {
+        type: "none";
     }
 }

@@ -218,8 +218,7 @@ export class DynamicSnippetsConverter {
                     text: () => DynamicSnippets.Response.text(),
                     bytes: () => DynamicSnippets.Response.bytes(),
                     _other: () => DynamicSnippets.Response.json()
-                }) ?? DynamicSnippets.Response.json(),
-            // Defaults to 'json' because response is required (and it was hardcoded to that previously).
+                }) ?? DynamicSnippets.Response.none(),
 
             examples: !disableExamples ? this.getEndpointSnippetRequests({ endpoint, location }) : undefined
         };

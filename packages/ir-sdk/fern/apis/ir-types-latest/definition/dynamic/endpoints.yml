@@ -44,6 +44,10 @@ types:
       fileDownload: {}
       text: {}
       bytes: {}
+      none:
+        docs: |
+          The endpoint does not return a response body (e.g. a 204 delete). Some SDKs
+          surface this in the method signature (e.g. Go returns only `error`).
 
   BodyRequest:
     properties:

@@ -200,7 +200,7 @@
                 }
             },
             "response": {
-                "type": "json"
+                "type": "none"
             },
             "examples": null
         },
@@ -333,7 +333,7 @@
                 }
             },
             "response": {
-                "type": "json"
+                "type": "none"
             },
             "examples": null
         },
@@ -382,7 +382,7 @@
                 "bodyRequired": false
             },
             "response": {
-                "type": "json"
+                "type": "none"
             },
             "examples": null
         }
