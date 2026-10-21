@@ -125,26 +125,7 @@ function migrateIntermediateRepresentation(
         errors: mapRecord(v67.errors, migrateErrorDeclaration),
         webhookGroups: mapRecord(v67.webhookGroups, (group) => group.map(migrateWebhook)),
         websocketChannels:
-            v67.websocketChannels != null ? mapRecord(v67.websocketChannels, migrateWebSocketChannel) : undefined,
-        dynamic: v67.dynamic != null ? migrateDynamicIntermediateRepresentation(v67.dynamic) : undefined
-    };
-}
-
-// V66 has no `none` dynamic response variant (added in v67.35.0), so endpoints without a
-// response body go back to `json`, which is what every earlier IR reported for them.
-function migrateDynamicIntermediateRepresentation(
-    dynamic: IrVersions.V67.dynamic.DynamicIntermediateRepresentation
-): IrVersions.V67.dynamic.DynamicIntermediateRepresentation {
-    return {
-        ...dynamic,
-        endpoints: mapRecord(dynamic.endpoints, (endpoint) => ({
-            ...endpoint,
-            response:
-                // Cast: the pinned V67 SDK predates 67.35.0 and does not know the `none` variant yet.
-                (endpoint.response.type as string) === "none"
-                    ? IrVersions.V67.dynamic.Response.json()
-                    : endpoint.response
-        }))
+            v67.websocketChannels != null ? mapRecord(v67.websocketChannels, migrateWebSocketChannel) : undefined
     };
 }
 

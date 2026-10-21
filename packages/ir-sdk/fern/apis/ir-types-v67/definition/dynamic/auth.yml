@@ -1,0 +1,112 @@
+imports:
+  commons: ./commons.yml
+  types: ./types.yml
+
+types:
+  Auth:
+    union:
+      basic: BasicAuth
+      bearer: BearerAuth
+      header: HeaderAuth
+      oauth: OAuth
+      inferred: InferredAuth
+
+  AuthValues:
+    union:
+      basic: BasicAuthValues
+      bearer: BearerAuthValues
+      header: HeaderAuthValues
+      oauth: OAuthValues
+      inferred: InferredAuthValues
+
+  BaseAuth:
+    properties:
+      wrapperProperty:
+        type: optional<commons.Name>
+        docs: |
+          Set when the API declares multiple auth schemes (requirement ANY /
+          ENDPOINT_SECURITY) and the SDK's constructor options for this scheme
+          must be nested under this property, named after the scheme key.
+      requirement:
+        type: optional<AuthRequirement>
+        docs: |
+          The API's auth requirement. Lets generators tell `auth: any` (ANY) apart
+          from endpoint-level security (ENDPOINT_SECURITY), since both set
+          `wrapperProperty`.
+
+  AuthRequirement:
+    enum:
+      - ALL
+      - ANY
+      - ENDPOINT_SECURITY
+
+  BasicAuth:
+    extends: BaseAuth
+    properties:
+      username: commons.Name
+      usernameOmit:
+        type: optional<boolean>
+        docs: If true, the username will be omitted from the SDK.
+      password: commons.Name
+      passwordOmit:
+        type: optional<boolean>
+        docs: If true, the password will be omitted from the SDK.
+
+  BasicAuthValues:
+    properties:
+      username: string
+      password: string
+
+  InferredAuth:
+    extends: BaseAuth
+    docs: |
+      Inferred auth retrieves tokens dynamically. The client constructor parameters
+      are defined by the parameters list.
+    properties:
+      parameters:
+        type: optional<list<types.NamedParameter>>
+        docs: List of parameters (from token endpoint) needed for auth, including their types.
+
+  InferredAuthValues:
+    docs: |
+      Parameter values for inferred auth in code snippets.
+      The keys are wire values matching the parameters in InferredAuth.
+    properties:
+      values:
+        type: optional<map<string, unknown>>
+        docs: Map of wire values to their example values for snippets.
+
+  BearerAuth:
+    extends: BaseAuth
+    properties:
+      token: commons.Name
+
+  BearerAuthValues:
+    properties:
+      token: string
+
+  HeaderAuth:
+    extends: BaseAuth
+    properties:
+      header: types.NamedParameter
+
+  HeaderAuthValues:
+    properties:
+      value: unknown
+
+  OAuth:
+    extends: BaseAuth
+    properties:
+      clientId: commons.Name
+      clientSecret: commons.Name
+      customProperties:
+        type: optional<list<types.NamedParameter>>
+        docs: Custom properties required for the OAuth token endpoint request, beyond clientId and clientSecret.
+
+  OAuthValues:
+    properties:
+      clientId: string
+      clientSecret: string
+      customPropertyValues:
+        type: optional<map<string, unknown>>
+        docs: Map of wire values to their example values for custom OAuth properties.

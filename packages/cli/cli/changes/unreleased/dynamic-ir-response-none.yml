@@ -1,7 +1,8 @@
 # yaml-language-server: $schema=../../../../../fern-changes-yml.schema.json
 
 - summary: |
-    The dynamic IR now reports `response: none` for endpoints that have no response body
+    The IR is now v68: the dynamic IR reports `response: none` for endpoints that have no response body
     (previously every endpoint was reported as `json`). This lets dynamic snippet generators
     distinguish `(response, error)` methods from `error`-only methods (e.g. Go deletes).
   type: fix
+  irVersion: 68

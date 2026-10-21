@@ -129,7 +129,7 @@ The IR carries its own semver in `packages/ir-sdk/fern/apis/ir-types-latest/VERS
 4. **Add an entry to `packages/ir-sdk/fern/apis/ir-types-latest/changelog/CHANGELOG.md`** describing the new field/feature, dated today, under a new `## [vMAJ.MIN.PATCH] - YYYY-MM-DD` heading at the top.
 5. Run `pnpm --filter @fern-api/ir-sdk compile` to confirm the workspace types still build.
 6. Do **not** edit `packages/cli/cli/versions.yml`'s `irVersion` — that field tracks the IR *major* and is only updated during major-version bumps.
-7. Do **not** edit `generators.yml` coordinates (`irV66`, `fern_fern_ir_v66`) — those reference the published external IR major and are stable across minor bumps.
+7. Do **not** edit `generators.yml` coordinates (`irV68`, `fern_fern_ir_v68`) — those reference the published external IR major and are stable across minor bumps.
 
 The IR changelog is **hand-edited**, not driven by a `changes/unreleased/` directory like the CLI.
 
